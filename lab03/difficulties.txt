@@ -1,0 +1,1 @@
+I had some difficulties getting the header in all the files correctly. I realized its not always good to include all the .h files in the headers. Also, at first i implemented the stack class method push() with insertAtTail which was a bad idea. other than that, there were just small things that made the compiler go bonkers. 

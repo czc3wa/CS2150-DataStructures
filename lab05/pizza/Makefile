@@ -1,0 +1,37 @@
+#corey chen czc3wa lab section 107
+CXX=clang++ 
+CXXFLAGS=-Wall -O2
+OFILES = pizza.o pizzadough.o tomatosauce.o toppings.o \
+    mushrooms.o peppers.o cheese.o pepperoni.o
+
+.SUFFIXES: .o .cpp
+
+#A target is just a name for something that make should do.
+#a target rule is just a few lines that define what to do for a particular target
+#Suffix rules are also known as implicit rules
+pizza: $(OFILES)
+	$(CXX) $(CXXFLAGS) $(OFILES) -o pizza
+	@echo "Pizza is Hot and Ready!"
+
+clean:
+	-rm -f *.o *~ pizza
+	
+cheese.o: cheese.cpp cheese.h
+
+mushrooms.o: mushrooms.cpp mushrooms.h
+
+pepperoni.o: pepperoni.cpp pepperoni.h
+
+peppers.o: peppers.cpp peppers.h
+
+pizza.o: pizza.cpp pizzadough.h tomatosauce.h toppings.h cheese.h \
+  mushrooms.h peppers.h pepperoni.h
+
+pizzadough.o: pizzadough.cpp pizzadough.h
+
+tomatosauce.o: tomatosauce.cpp tomatosauce.h
+
+toppings.o: toppings.cpp toppings.h cheese.h mushrooms.h peppers.h \
+  pepperoni.h
+	
+

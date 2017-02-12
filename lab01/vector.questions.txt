@@ -1,0 +1,3 @@
+//Corey Chen CZC3WA vector.questions.txt
+
+Why is a vector used in this program?

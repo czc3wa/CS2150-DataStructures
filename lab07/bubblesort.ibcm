@@ -1,0 +1,83 @@
+C01A 000         jmp      start  skip around the variables
+0000 001   i     dw       0      int i
+0003 002   MAX   dw       0      int max # of elements to srt
+0011 003   a     dw       11      int a[] BASE ADDRESS = 011
+0000 004   zero  dw       0
+0001 005   one   dw       1
+6000 006   subit dw       6000   subtract it 
+4000 007   store dw       4000   store it
+3000 008   ldit  dw       3000   load it
+0000 009   temp  dw       0       temp variable
+0000 00A   j     dw       0       
+0000 00B   a[j]  dw       0      value at address a[j]
+0000 00C  a[j-1] dw       0      value at address a[j-1]
+0000 00D
+0000 00E
+0000 00F
+0000 010        SPACE FOR EXTRA VARIABLES IF NEEDED
+0007 011   a0    dw       
+0006 012   a1    dw          
+0005 013   a2    dw       
+0004 014   a3    dw       
+0003 015   a4    dw       
+0002 016   a5    dw       
+0001 017   a6    dw       
+0000 018
+0000 019
+3002 01A   LOOP1  Load     MAX    
+6001 01B         sub      i  
+E052 01C         jmpl     HALT
+D052 01D         jmpe     HALT
+3002 01E         Load     MAX     
+6001 01F         sub      i 
+400A 020         store    j     STORE max - i into j
+300A 021   LOOP2 load     j
+6001 022         sub      i 
+D04E 023         jmpe           jump to address that increments i 
+E04E 024         jmpl           jump to address that increments i 
+3008 025         load    ldit   
+5003 026         add     a      3000 + a
+500A 027         add     j      (3000+a) + j
+4029 028         store   029    store whats in accum to next line
+0000 029   doit  dw      0      
+400B 02A         store   a[j]    stores value at address a[j] into a[j]
+3029 02B         load    029     load what was in address 029
+6005 02C         sub     1      
+402E 02D         store   02E      store load into next line
+0000 02E   doit  dw      0
+400C 02F         store   a[j-1]    store value at address a[j-1] into a[j-1]
+300B 030         load    a[j]
+600C 031         sub     a[j-1]
+E037 032         jmpl    037      if negative jump to
+300A 033         load    j       if POSITIVE decrement j
+6005 034         sub     1
+400A 035         store   j
+C021 036         jmp     LOOP2      jump back to start of for loop
+300B 037         load    a[j]
+4009 038         store   temp    store value of a[j] into temp
+300C 039         load    a[j-1]
+400B 03A         store   a[j]    store value of a[j-1] into a[j]
+3009 03B         load    temp    
+400C 03C         store   a[j-1]  store value in temp into a[j-1]
+3007 03D         load    4000    loads store command
+5003 03E         add     a
+500A 03F         add     j
+4042 040         store   042     store whats in accum to 042
+300B 041         load    a[j]    load value of a[j] thne store it to a[j]'s addr
+0000 042   doit  dw      0  
+3007 043         load    4000    loads store command
+5003 044         add     a
+500A 045         add     j
+6005 046         sub     1
+4049 047         store   049     store whats in accum to 049
+300C 048         load    a[j-1]    load value of a[j-1] thne store it to a[j-1]'s addr
+0000 049   doit  dw      0 
+300A 04A         load    j       begins to decrement j
+6005 04B         sub     1
+400A 04C         store   j       stores decremented j into j
+C021 04D         jmp     LOOP2     jump back to start of 2nd for loop
+3001 04E         load    i       where first for loop jumps to if not halt to inc i
+5005 04F         add     1       increments i
+4001 050         store   i       stores incremented i
+C01A 051         jmp     LOOP1   jump back to first for loop
+0000 052         HALT    0       

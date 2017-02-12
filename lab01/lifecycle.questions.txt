@@ -1,0 +1,7 @@
+//Corey Chen CZC3WA lifecycle.questions.txt 08/30/2016
+
+What is this program trying to accomplish?
+
+What are bob and sally trying to do?
+
+Why does the program start with ("I'm static, outside of main",1)?

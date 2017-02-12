@@ -1,0 +1,2 @@
+What exactly are template classes?
+what other times do we not need to follow the header/body/main format?

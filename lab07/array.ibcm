@@ -1,0 +1,54 @@
+C015 000         jmp      start  skip around the variables
+0000 001   i     dw       0      int i
+0000 002   max   dw       0      int max
+0010 003   a     dw       0      int a[]
+0004 004   n     dw       0
+0000 005   zero  dw       0
+0001 006   one   dw       1
+6000 007   adit  dw       6000
+3000 008   ldit  dw       3000
+0000 009
+0000 00A
+0000 00B
+0000 00C
+0000 00D
+0000 00E
+0000 00F
+0001 010   a0    dw       
+0002 011   a1    dw
+0003 012   a2    dw
+0004 013   a3    dw
+0005 014   a4    dw
+3005 015         load     zero   i = 0; s = 0;
+4001 016         store    i
+3004 017   loop  load     n      if (i >= N) goto xit
+6001 018         sub      i
+E031 019         jmpl     xit    JUMP TO EXIT WHICH PRINTS OUT MAX
+D031 01A         jmpe     xit    JUMP TO EXIT WHICH PRINTS OUT MAX
+3007 01B         load     adit   form the inst to add a[i]
+5003 01C         add      a
+5001 01D         add      i
+B000 01E         nop             nop op because of error in address counting/ does nothing
+4021 01F         store    doit   plant inst into the code
+3002 020         load     max    load max into accum
+0000 021   doit  dw       0
+1800 032         printH
+0000 033         Halt
+E026 022         jmpl            if max-ai is neg, starts to assign a sub i to max
+3001 023         load     i      i += 1
+5006 024         add      one
+4001 025         store    i 
+C017 026         jmp      loop   goto loop if max - ai is positive
+3008 027         load     ldit   load, the load command: 3000
+5003 028         add      a      adds base address
+5001 029         add      i      gets value of ai and adds it to command 3000 so we can load it later
+402B 02A         store    doit   plant inst into the code
+0000 02B   doit  dw       0      load ai into accum
+4002 02C         store    max    stores ai as MAX
+3001 02D         load     i      i += 1
+5006 02E         add      one   
+4001 02F         store    i
+C017 030         jmp      loop   go to loop
+3002 031 xit     load     MAX    loads max
+1800 032         printH
+0000 033         Halt
